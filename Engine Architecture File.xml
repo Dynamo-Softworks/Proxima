@@ -1,45 +1,97 @@
 Engine Structure
+Key
+^	Development Awaits Phase 2 Completion
+*	Development Awaits Phase 3 Completion
++	Proposed Subsystem, will not necessarily be developed in stated form, or at all. 
+Phase 1
+	Structure and Control Archsystem: 1-A
+		Save/Load Subsystem: 1A-a0
+			Allows game states to be saved and loaded from memory.
+		^Map Generation Subsystem: 1-A-b0
+			Allows stations to be crafted by hand, or procedurally generated with a number of variables.
+		*Story Subsystem: 1-A-c0
+			Places logs on computers to be found. May procedurally generate story elements.
+		Music Subsystem: 1-A-d0
+			Plays music. May procedurally generate music, or play specific music at specific times.
+		HID Subsystem: 1-A-e0
+			Interfaces human interface devices into UI.
+		Display Subsystem: 1-A-f0
+			Displays game on window. Handles graphics.
+		*Options Subsystem: 1-A-h0
+			Allows graphics, key binding, audio, etc to be modified to a player's liking.
+		+Procedural Generation Subsystem: 1-A-i0
+			Handles all procedural generation/procedural content. Interfaces with other subsystems.
+			
 	Electrical Simulation Archsystem
-		Component Generation Subsystem
+		+Component Generation Subsystem
 			Generates components beyond stock, handles user generated components, analyses component statistics for player.
 		Circuit Level Behaviour Subsystem
 			Handles flow of electricity, interaction between components, etc.
 		Component Level Behaviour Subsystem
-			Handles component behaviour(I.E special functions like RF, sensors, and oscillators)
-		Script Generation Subsystem
+			Handles component behaviour(I.E special functions like RF, sensors, and oscillators) component attributes, methods that allow electricity to be transferred, etc. To be developed in conjunction with Circuit Level Behaviour Subsytsem.
+		*Script Generation Subsystem
 			Outputs circuit behaviour as LUA script for efficiency and ease of customization.
 			
+	Test Bed Level UI
+		Game/UI Interface Subsystem
+			Communicates between other subsystems and the UI, and vis versa. HID Subsystem meshes with this.
+		Display Subsystem
+			Enables the display of electronic components and circuits for testing.
+		Test Level UI Elements
+			Bits of UI required to test circuit simulation in engine. I.E Component drag and drop, ability to connect components, add in components, etc.
+		
+Phase 2
+	+UI Archsystem(If a nodal based procedural UI/Traditional Windowed UI is used. Think DF, FTL, and Limit Theory)
+		Node Generation Subsystem
+			Generates nodes for objects. Handles locations, fields, and methods associated with a node.
+		UI Display Subsystem
+			Handles UI graphics specifically.
+		Game/UI Interface Subsystem
+			Communicates between other subsystems and the UI, and vis versa. HID Subsystem meshes with this.
+		Node Networking Subsystem
+			Handles connections between nodes.
+		Nodal Window Subsystem
+			Handles windows displaying information from nodes or other game components (Bots, Command Lines, etc.)
+		Voxel Overlay Subsystem
+			Handles display of voxel map of the station, and overlays objects onto this map.
+		
 	Macro Station Simulation Archsystem
 		Macro Level Circuit Integration Subsystem
 			Handles circuitry interacting with the station and the station with circuitry.(I.E Power, dumb control, etc.)
 		Station Networking Subsystem
 			Handles connectivity between computers and circuitry.(I.E Data, smart control, etc.)
-		*Fluid Flow*
+		+Fluid Flow
 			Proposed system for handling air and other fluid flow through the station. Could come into play during fire, hull breaches, oil spills, etc.
-		
+			
+Phase 3		
 	Script Archsystem
 		Computer Emulation Subsystem
 			Controls the behaviour of emulated computer systems, and their interaction with circuitry and the station. Runs programs on these computers.
 		Microcontroller Emulation Subsystem
 			Controls the behaviour of microcontrollers and other complex circuitry that has been rendered as a script. Runs programs on these devices.
+			
 	Pathfinding Archsystem
 		Bot Control Subsystem
+			Enables repair bots to be controlled.
 		Bot Automation Subsystem
-		Collision Detection Subsystem
+			Enables bots to be programmed using scripts.
+		Collision Detection/NavMesh Subsystem
+			Enables bots to move through the station and complete tasks efficiently and without clipping through other objects.
 	
-	UI Archsystem(If a nodal based procedural UI is used)
-		Node Generation Subsystem
-		UI Display Subsystem'
-		Game/UI Interface Subsystem
+	Hostile Elements
+		Hacking Subsystem
+			Handles the purposeful sabotage of player.
+		Decay Subsystem
+			Handles natural component failure.
+	
+	Customization
+		Custom Components 
 		
-	Structure and Control Archsystem
-		Save/Load Subsystem
-		Map Generation Subsystem
-		Music Subsystem
-		HID Subsystem
-		Display Subsystem
-		Options Subsystem
-		Procedural Generation Subsystem
-		Menu Subsystem
+	
+	
+		
+		
+	
+		
 		
 	

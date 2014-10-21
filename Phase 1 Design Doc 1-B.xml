@@ -1,0 +1,13 @@
+Phase 1 Design Doc 1-B
+	Archsystem: Electrical Simulation
+	Subsystem: Component Level Behaviour
+	
+Auxiliary Systems:
+	Component Database
+	Component Class Inheritance Tree
+Subsystems Interfacing With:
+	
+
+
+
+Components are created as instances of appropriate classes, with fields filled in from the component data base
