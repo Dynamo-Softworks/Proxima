@@ -1,0 +1,45 @@
+Engine Structure
+	Electrical Simulation Archsystem
+		Component Generation Subsystem
+			Generates components beyond stock, handles user generated components, analyses component statistics for player.
+		Circuit Level Behaviour Subsystem
+			Handles flow of electricity, interaction between components, etc.
+		Component Level Behaviour Subsystem
+			Handles component behaviour(I.E special functions like RF, sensors, and oscillators)
+		Script Generation Subsystem
+			Outputs circuit behaviour as LUA script for efficiency and ease of customization.
+			
+	Macro Station Simulation Archsystem
+		Macro Level Circuit Integration Subsystem
+			Handles circuitry interacting with the station and the station with circuitry.(I.E Power, dumb control, etc.)
+		Station Networking Subsystem
+			Handles connectivity between computers and circuitry.(I.E Data, smart control, etc.)
+		*Fluid Flow*
+			Proposed system for handling air and other fluid flow through the station. Could come into play during fire, hull breaches, oil spills, etc.
+		
+	Script Archsystem
+		Computer Emulation Subsystem
+			Controls the behaviour of emulated computer systems, and their interaction with circuitry and the station. Runs programs on these computers.
+		Microcontroller Emulation Subsystem
+			Controls the behaviour of microcontrollers and other complex circuitry that has been rendered as a script. Runs programs on these devices.
+	Pathfinding Archsystem
+		Bot Control Subsystem
+		Bot Automation Subsystem
+		Collision Detection Subsystem
+	
+	UI Archsystem(If a nodal based procedural UI is used)
+		Node Generation Subsystem
+		UI Display Subsystem'
+		Game/UI Interface Subsystem
+		
+	Structure and Control Archsystem
+		Save/Load Subsystem
+		Map Generation Subsystem
+		Music Subsystem
+		HID Subsystem
+		Display Subsystem
+		Options Subsystem
+		Procedural Generation Subsystem
+		Menu Subsystem
+		
+	
