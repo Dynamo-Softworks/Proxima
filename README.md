@@ -7,7 +7,7 @@ TSA Game Design Overview
 
 This repository is for the development of a game, as of yet unnamed, for the TSA Video Game Design Competition and TSA Open Source Software Competiton.
 
-A top down strategy game, inspired by Dwarf Fortress, FTL, and a love of Computer Science and Electrical Engineering, this game is designed to teach players electonics engineering, from the basics to the collegiate level in the form of a deeply immersive game.
+This is a top down strategy game written in C++, currently in development, and is inspired by Dwarf Fortress, FTL, and a love of Computer Science and Electrical Engineering, this game is designed to teach players electonics engineering, from the basics to the collegiate level in the form of a deeply immersive game.
 
 Story:
   You are an unnamed mantinence AI onboard a station orbiting a newly discovered planet orbiting a star many lightyears from earth. You wake up from an unschedualed shutdown to find your crew missing, your station in shambles, and your own Primary Neural Core in critical condition. Repair your station. Find your crew. Reclaim your mind.
