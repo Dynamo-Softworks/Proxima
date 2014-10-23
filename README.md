@@ -5,7 +5,7 @@ PROXIMA-README
 
 TSA Game Design Overview
 
-This repository is for the development of a game, called Proxima for the TSA Video Game Design Competition and TSA Open Source Software Competition.
+This repository is for the development of a game, called Proxima, for the TSA Video Game Design Competition and TSA Open Source Software Competition.
 
 This is a top down strategy game written in C++. Currently in development, it is inspired by Dwarf Fortress, FTL, and a love of Computer Science and Electrical Engineering. This game is designed to teach players electronics engineering, prototyping, and programming, from the basics to the collegiate level in the form of a deeply immersive game.
 
