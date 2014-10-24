@@ -73,9 +73,14 @@ int main()
 	
 		
 	}
-	else
+	else if (output==1)
 	{
 		std::cout<< "yes";
+	}
+	else
+	
+	{
+		std::cout<< "!ERROR!";
 	}
 	return 0;
 	
