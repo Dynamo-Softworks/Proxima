@@ -5,9 +5,79 @@ Phase 1 Design Doc 1-B
 Auxiliary Systems:
 	Component Database
 	Component Class Inheritance Tree
-Subsystems Interfacing With:
+Interfacing With:
+	UI
+	Macro Simulation
+	Script Generation
+	openGL pipeline
 	
 
 
 
-Components are created as instances of appropriate classes, with fields filled in from the component data base
+ Components are created as instances of appropriate classes, with fields filled in from a component database. The component class defines the basic fields that all components have, like position on screen, polarity(or not), current state, current voltage, current current, and resistance, and contains methods for transferring voltage and current to other components, as well as dealing with sending electricity in the correct direction. Classes defining specific types of components inherit from this generic component class, and subclasses are defined from there. An example of this tree could be as follows:
+ 
+ Generic>Diode>LED
+ or
+ Generic>Switch>Semiconductor>Transistor
+ or as a another possibility
+ Generic>Switch>Tactile>Button
+ 
+ 
+ Whether or not inductance and capacitance will be simulated is up to debate, as many of the effects of these properties for most components are negligible. These properties may only be simulated for components that specifically deal with those properties, such as inductors, solenoids, capacitors, etc. It is recommended that team members read up on the basic types of electrical components, as if those are able to be simulated, and are able to interact with other components, devices ranging from light switches to entire computers are theoretically possible to simulate, though for complex machines, scripts are probably more performance friendly. In that regards, some sort of script builder needs to be developed to handle the conversion of circuit behaviour to some form of script that can be ran faster and has the same properties. Such a marriage of the scripting and component method for a circuit simulator allows players to familiarize themselves with the low level, while also having access to the high level. Scripts could be saved as "blocks" that could aid in UI simplicity, and allow large pieces of electronic structure to be dealt with easily. If these scripts also remembered where the initial component structure is stored, the player could also dig down into a circuit 'block', make changes to the structure there, from which the game would automatically recompile the circuit into a new script, preserving the old and allowing fast prototyping of the new. This system would be beneficial on a couple of levels, as it allows the player to easily reuse pieces of previous projects, allows the player to easily make changes, and also keeps the UI clean and easy to read. It also opens the opportunity for players to easily share script files bundled with the appropriate circuitry structure files, allowing players to see just what makes another player's project tick.
+ 
+ How electricity itself will be handled is another matter. Would electricity be some sort of an object, or more of a combination of field values that gets passed on to other components?
+ 
+ Interfacing the circuit with the outside game world is also a hurdle that needs to be cleared. How would switches be activated? How would every circuit be simulated without losing performance? How would all of this information be stored, saved, and reloaded in a timely manner? These problems are not an issue when only considered in the reference frame of the circuit builder/simulation mechanic, but how are these things going to be pulled together in the macro station simulator? How is performance going to be kept down so that this game is playable an average PC? All of these questions need to be considered and solved before this Archsystem can be considered complete.
+ 
+ 
+ 
+ Example Component Tree
+ Generic>   Diode>
+                    Generic_LED
+                    Generic_Diode
+            
+            
+            Switch>
+                    Tactile>    GenericButton
+                                GenericSwitch
+                                
+                    
+                    SolidState>
+                                Generic_NPN_Transistor
+                                et.
+                    
+                    Vacuum Tube>
+                                Generic_Audio_Tube
+                                etc.
+            
+            
+            Power Supply>
+                    Battery>
+                            Generic_Battery
+                            Generic_Rechargable_Battery
+                            
+                    
+                    Generator>
+                            Generic_AC
+                            Generic_DC
+                                        
+            
+            Capacitor
+                    High_Voltage>
+                            Generic_High_Volatge_Cap
+                            Generic_Capcitor_Bank
+                            
+                    Low_Voltage>
+                            Generic_Low_Voltage_Cap
+                         
+            
+            
+            Inductor
+            
+            Sensor
+            
+            
+            
+ 
+
+ 
