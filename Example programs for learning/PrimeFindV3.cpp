@@ -3,44 +3,44 @@
 
 int primefind(long long number)
 {
-	long double temp,temp2;
+	long double temp,temp2,temp3;
 	//values used in calculating primes. long double to handle large values
-	long long c=2, primestop=(number/2)+1;
+	long long c=1;
 	//values used in displaying primes.
-	int test=1;
+	int test=1, primestop=(number/c)+1;
 	//test value used to show if tested value is a prime
-	while(c<primestop && test==1)
+	while(c<primestop && test==1 && c<number)
 	{
 		temp=(float)number/(float)c;
 		//divides tested value by the count
-		temp2=trunc(temp);
-		//truncates that value
-		
+		temp2=round(temp);
+		//rounds that value
+		temp3=temp2-temp;
 		//checks to see if the rounded value and the tested value are the same. If they are, then the tested number is divisible by the count value, if not the tested value is not divisible by the count value.
-		if(temp2!=temp)
+		if(temp3==0 && c!=1 && c!=number)
 		{
-		test=0;
+			test=0;
 		}
 		else
 		{
 			test=1;
 		}
 		//checks to see if the tested value has been disproven to be prime. Stops the loop if the tested value has been disproven.
-		if(c!=2)
+		if(c<3)
 		{
-			c=c+2;
+			c++;
 		}
 		else
 		{
-			c=3;
+			c=c+2;
 		}
 		
+		//modifies count amount for efficiency
 	}
 
 	return test;
 		
 }
-
 
 
 using namespace std;
@@ -61,7 +61,8 @@ int main()
 	{
 		double long b=start/2;
 		double long c=round(b);
-		if(c==b)
+		double long d=b-c;
+		if(d==0)
 		{
 			start=start+1;
 			check=start;
