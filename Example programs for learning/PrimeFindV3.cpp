@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <cmath>
 
 //Messes up on numbers less than 10, otherwise it works
 
@@ -48,31 +49,19 @@ int primefind(long long number)
 using namespace std;
 int main()
 {
-	long long start, stop, check=1;
+	long long start=1, stop, check=1;
 	//values used in counting up to primes.
 	int output;
 	//values used in transmitting state.
 	
 	
-	cout << "Enter a start number greater to or equal to 1.\n";
-	cin >>start;
+	
 	cout << "Enter an end value.\n";
 	cin>> stop;
 	//gets stop and start values
 	if(start>=1)
 	{
-		double long b=start/2;
-		double long c=round(b);
-		double long d=b-c;
-		if(d==0)
-		{
-			start=start+1;
-			check=start;
-		}
-		else
-		{
-			check=start;
-		}
+		check=start;
 	}
 	else
 	{
@@ -88,7 +77,6 @@ int main()
 		{
 			cout<< "";
 	
-		
 		}
 		else if(output==1)
 		{
@@ -99,7 +87,14 @@ int main()
 		{
 			cout<< " !ERROR! ";
 		}
+		if (check>2)
+		{
 		check=check+2;
+		}
+		else
+		{
+			check++;
+		}
 	}
 	return 0;
 	
