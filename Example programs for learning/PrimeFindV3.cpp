@@ -1,8 +1,6 @@
 #include <iostream>
 #include <math.h>
-#include <cmath>
 
-//Messes up on numbers less than 10, otherwise it works
 
 int primefind(long long number)
 {
