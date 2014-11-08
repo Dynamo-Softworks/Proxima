@@ -1,0 +1,114 @@
+#include <SDL.h>
+#include <sstream>
+#include <time.h> 
+
+int main(int argc, char ** argv)
+{
+	//Declaring
+	bool quit = false;
+	SDL_Event event;
+	float x = 288.0;
+	float y = 208.0;
+	//Initializing
+	SDL_Init(SDL_INIT_VIDEO);
+	SDL_Window * window = SDL_CreateWindow("Ball Jumper", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, 0);
+	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+	SDL_Surface * image = SDL_LoadBMP("down.bmp");
+	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image);
+	SDL_FreeSurface(image);
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	//Declaring
+	float times = 0.0;
+	float yvel = 0;
+	float xvel = 0;
+	int next = 0;
+	int nextkey = 0;
+	int mouseX = 0;
+	int mouseY = 0;
+
+	while (!quit)
+	{
+		SDL_PollEvent(&event);
+
+		//Slows velocity after set period of time and adds pseudo-gravity
+		if (clock() > next)
+		{
+			next += 25;
+			xvel = xvel * .95;
+			yvel = yvel * .95;
+		}
+	
+		x += xvel;
+		y += yvel;
+		switch (event.type)
+		{
+			//To use keys and such
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym)
+			{
+				//WADX for normal movement
+			case SDLK_a: xvel -= 0.1;
+				break;
+			case SDLK_d: xvel += 0.1;
+				break;
+			case SDLK_w: yvel -= 0.1;
+				break;
+			case SDLK_x: yvel += 0.1;
+				break;
+				//QEZC are used for doing both left/right and up/down since I cannot handle multiple key presses
+			case SDLK_q: yvel -= 0.1; xvel -= 0.1;
+				break;
+			case SDLK_e: yvel -= 0.1; xvel += 0.1;
+				break;
+			case SDLK_z: yvel += 0.1; xvel -= 0.1;
+				break;
+			case SDLK_c: yvel += 0.1; xvel += 0.1;
+				break;
+			case SDLK_s: yvel = 0; xvel = 0;
+				break;
+			case SDL_KEYDOWN:
+				break;
+			case SDLK_ESCAPE:
+				//if escape is pressed it closes the window
+				SDL_DestroyTexture(texture);
+				SDL_DestroyRenderer(renderer);
+				SDL_DestroyWindow(window);
+				SDL_Quit();
+				return 0;
+			}
+		case SDL_MOUSEBUTTONDOWN:
+			switch (event.button.button)
+			{
+			case SDL_BUTTON_LEFT:
+				mouseX = event.motion.x;
+				mouseY = event.motion.y;
+				x = (mouseX - 30);
+				y = (mouseY - 30);
+				break;
+			}
+		}
+		//Moves the ball to other end of screen if exceeds boundaries
+		if (x > 580){
+			x = 0;
+		}
+		if (x < 0){
+			x = 580;
+		}
+		//Stops ball so it doesn't continue to fall or rise
+		//Just a warning : the surface takes the position from the top left, so you have to adjust for the sprite's size
+		if (y > 420){
+			y = 419;
+			yvel = 0;
+		}
+		if (y < 0){
+			y = 1;
+			yvel = 0;
+		}
+
+		//Renders
+		SDL_Rect dstrect = { x, y, 64, 64 };
+		SDL_RenderClear(renderer);
+		SDL_RenderCopy(renderer, texture, NULL, &dstrect);
+		SDL_RenderPresent(renderer);
+	}
+}
