@@ -2,7 +2,7 @@
 #include <math.h>
 
 //Calls number by reference, rather than by value, using &. This reduces memory usage by reducing the memory used by the function, as if number is called by value (without &) then the function has to copy the value of the input variable to the function. This way, there is no copying, as the input variable IS the variable used in the function.
-int primefind(long long& number)
+int primefind(const long long& number)
 {
 	long double temp,temp2,temp3;
 	//values used in calculating primes. long double to handle large values
