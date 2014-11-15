@@ -1,0 +1,171 @@
+//Including files, most of them are unused
+#include <SDL.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <stdio.h>
+#include <string>
+#include <cmath>
+#include <sstream>
+#include <time.h>
+#include <iostream>
+#include <cmath>
+
+//Declaring variables (globals - do not do this in the main game)
+double xvel = 0;
+double yvel = 0;
+int next = 0;
+double x = 0;
+double y = 0;
+int screenwidth = 640;
+int screenheight = 480;
+int orgtexturesize = 164;
+int texturesize = orgtexturesize / 2;
+int mouseX = 0;
+int mouseY = 0;
+//This variable is pretty cool, makes the gear switch direction
+bool TOP = true;
+
+
+//initializing everything
+int main(int argc, char ** argv)
+{
+	//if quit = true then the function will makeit quit
+	bool quit = false;
+	//Event
+	//SDL_Event event;
+	//Init
+	SDL_Init(SDL_INIT_VIDEO);
+	IMG_Init(IMG_INIT_PNG);
+
+	//Opens window, with the specified name, xpos, ypos, length and height
+	SDL_Window * window = SDL_CreateWindow("Rotation and Movement", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, screenwidth, screenheight, 0);
+	//Rendering of objects
+	SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, 0);
+	//Gets an image and creates a texture from it
+	SDL_Surface * image = IMG_Load("gear.png");
+	SDL_Texture * texture = SDL_CreateTextureFromSurface(renderer, image);
+	//Color for the renderer
+	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+	//Refeshes
+	SDL_RenderClear(renderer);
+
+	//Angle of rotation
+	double degrees = 0;
+
+	//Event handler
+	SDL_Event e;
+
+	while (!quit)
+	{
+
+		//To use keys and such
+		//User requests quit
+		//Handle events on queue, only quit because you may need multiple key presses at once
+		while (SDL_PollEvent(&e) != 0)
+		{
+			if (e.type == SDL_QUIT)
+			{
+				quit = true;
+			}
+			//was going to go to mouse position, but I got lazy. Now it goes to 0,0 so you can stick to the top again
+			if (e.type == SDL_MOUSEBUTTONDOWN)
+			{
+				x = mouseX;
+				y = mouseY;
+			}
+			
+		}
+		//Able to handle multiple key presses
+		const Uint8* currentKeyStates = SDL_GetKeyboardState(NULL);
+		if (currentKeyStates[SDL_SCANCODE_UP])
+		{
+			if (y == screenheight - texturesize || x == screenwidth - texturesize || x == 0){
+				yvel -= 0.35;
+			}
+			//yvel -= 0.0004;
+		}
+		if (currentKeyStates[SDL_SCANCODE_DOWN])
+		{
+			yvel += 0.0004;
+		}
+		if (currentKeyStates[SDL_SCANCODE_LEFT])
+		{
+			xvel -= 0.0004;
+		}
+		if (currentKeyStates[SDL_SCANCODE_RIGHT])
+		{
+			xvel += 0.0004;
+		}
+
+		//Slows velocities down every time the clock ticks 25 times
+		//just comment it out if you don't want the ball slowed
+		if (clock() > next)
+		{
+			next += 20;
+			xvel = xvel * .935;
+			if (yvel < 20 && y != 420 && yvel != 0){
+				yvel += 0.025;
+			}
+		}
+
+		//Xpos of the ball + the xvel, y for y
+		x += xvel;
+		y += yvel;
+
+		//If the texture goes past the edge, loop
+		if (x > screenwidth - texturesize){
+			x = screenwidth - texturesize;
+			if (TOP == 0){
+				yvel = xvel * -1;
+			}
+			else{
+				yvel = xvel;
+			}
+		}
+		if (x < 0){
+			x = 0;
+			if (TOP == 0){
+				yvel = xvel;
+			}
+			else{
+				yvel = xvel * -1;
+			}
+			
+		}
+		//Just a warning : the surface takes the position from the top left, so you have to adjust for the sprite's size
+		//These two functions make the ball "stick" to the surfaces; no falling
+		if (y > screenheight - texturesize){
+			y = screenheight - texturesize;
+			yvel = 0;
+			TOP = 0;
+		}
+		if (y < 0){
+			y = 0;
+			yvel = 0;
+			TOP = 1;
+		}
+
+		//Yeah, this rotation isn't right mathematically, but for a test it appears to work well enough
+		degrees += xvel;
+
+		//Renders and stuff
+		SDL_Rect srcrect = { 0, 0, orgtexturesize, orgtexturesize };
+		SDL_Rect dstrect = { x, y, texturesize, texturesize };
+
+		//This would be used if I wanted to update the screen, but that's no fun
+		SDL_RenderClear(renderer);
+		//Renders the textures to the screen
+		SDL_RenderCopyEx(renderer, texture, &srcrect, &dstrect, degrees, 0, SDL_FLIP_NONE);
+		//Refeshes
+		SDL_RenderPresent(renderer);
+	}
+	//Destroys and quits
+	SDL_DestroyTexture(texture);
+	SDL_FreeSurface(image);
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	IMG_Quit();
+	SDL_Quit();
+
+	return 0;
+}
