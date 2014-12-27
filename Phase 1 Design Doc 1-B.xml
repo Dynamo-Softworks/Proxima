@@ -78,6 +78,8 @@ Interfacing With:
             
             
             
+ Alright. So I have an idea. I am currently in the process of building a components system with two base classes, components and connectors. Components pretty much work as described above, and have some basic properties that determine how it behaves. Connectors are the other part of the equation. They determine how components interact with each other. For now, all connectors will behave the same way, but I hope for Proxima to have multiple types of connectors. One type may be more durable, or be able to take more load than another type, at the price of having a higher resistance or emitting higher amounts of radiation. Depending on the bot doing the circuit, the connectors might be of a different base quality as well, much like an inexperienced human solderer makes worse joints than an experienced one in real life.
  
+ Note: Durability, max loads, etc. have not been implemented. I am focusing on getting a command line program to be able to have a number of components, in a simulated 3D environment (not rendered) that are connected and have electricity flowing through the system accurately.
 
- 
+ In essence, a connector will be "attached" to one component as either an input, or an output, and will bridge two components together. These connectors are the equivalent of solder joints in real life. 
