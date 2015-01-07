@@ -103,7 +103,21 @@ Phase 4
 	
 
 	
+		General Program Structure
 		
+				Graphics Cycle
+					LOD Cut off for circuit display
+					1 thread
+				
+				Simulation Cycle
+					LOD cut off for simulation complexity managment
+						Simulates non critical/not very dynamic circuits once and a while, critical stuff gets simulated in check with graphics.
+					Circuit trees
+						Circuits are trees of arrays which communicate with other trees to simulate interconnected circuits.	
+					1 thread for non player centric stuff- Background simulation
+					1 thread for player centric stuff- circuits being viewed by the player, built by the player, etc.
+						
+					
 		
 		
 	
